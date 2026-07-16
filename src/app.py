@@ -115,18 +115,18 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
         
         # Hiển thị Nguồn trích dẫn
-        if "sources" in message and message["sources"]:
+        if message.get("sources"):
             with st.expander("📚 Xem nguồn trích dẫn"):
                 for src in message["sources"]:
                     st.write(f"- {src}")
                     
         # Hiển thị nhật ký RAG chi tiết
-        if "steps" in message and message["steps"]:
+        if message.get("steps"):
             with st.expander("⚙️ Nhật ký RAG Runtime Workflow (Chi tiết quá trình xử lý)"):
                 for step in message["steps"]:
-                    icon = "✅" if step["status"] == "success" else "⚠️"
-                    st.markdown(f"##### {icon} {step['title']}")
-                    st.markdown(step["details"])
+                    icon = "✅" if step.get("status") == "success" else "⚠️"
+                    st.markdown(f"##### {icon} {step.get('title')}")
+                    st.markdown(step.get("details", ""))
                     st.markdown("---")
 
 # Xử lý tin nhắn mới từ người dùng
@@ -148,33 +148,33 @@ if prompt := st.chat_input("Nhập câu hỏi tra cứu chính sách..."):
             response = generate_answer(prompt, department_filter=current_dept)
             
             # Ghi lại trạng thái các bước đã chạy
-            for step in response["steps"]:
-                status.write(f"✓ {step['title']}")
+            for step in response.get("steps", []):
+                status.write(f"✓ {step.get('title')}")
                 
             status.update(label="RAG Workflow hoàn tất!", state="complete", expanded=False)
             
         # Hiển thị câu trả lời của LLM
-        message_placeholder.markdown(response["answer"])
+        message_placeholder.markdown(response.get("answer", ""))
         
         # Hiển thị nguồn trích dẫn tài liệu
-        if response["sources"]:
+        if response.get("sources"):
             with st.expander("📚 Xem nguồn trích dẫn"):
                 for src in response["sources"]:
                     st.write(f"- {src}")
                     
         # Hiển thị nhật ký RAG chi tiết cho câu hỏi vừa rồi
-        if response["steps"]:
+        if response.get("steps"):
             with st.expander("⚙️ Nhật ký RAG Runtime Workflow (Chi tiết quá trình xử lý)"):
                 for step in response["steps"]:
-                    icon = "✅" if step["status"] == "success" else "⚠️"
-                    st.markdown(f"##### {icon} {step['title']}")
-                    st.markdown(step["details"])
+                    icon = "✅" if step.get("status") == "success" else "⚠️"
+                    st.markdown(f"##### {icon} {step.get('title')}")
+                    st.markdown(step.get("details", ""))
                     st.markdown("---")
                         
         # Lưu câu trả lời vào lịch sử chat
         st.session_state.messages.append({
             "role": "assistant",
-            "content": response["answer"],
-            "sources": response["sources"],
-            "steps": response["steps"]
+            "content": response.get("answer", ""),
+            "sources": response.get("sources", []),
+            "steps": response.get("steps", [])
         })
