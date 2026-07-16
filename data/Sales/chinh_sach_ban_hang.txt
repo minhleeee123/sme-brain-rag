@@ -1,0 +1,113 @@
+# CÔNG TY CỔ PHẦN CÔNG NGHỆ VÀ TRUYỀN THÔNG SME-TECH
+*Mã tài liệu: CSBH-SALES-2026-V3*
+*Hà Nội, ngày 15 tháng 02 năm 2026*
+
+# CHÍNH SÁCH BÁN HÀNG, DỊCH VỤ VÀ BIỂU GIÁ CHI TIẾT
+*(Áp dụng cho toàn bộ các sản phẩm phần mềm SaaS và dịch vụ tích hợp hệ thống của SME-Tech)*
+
+---
+
+## CHƯƠNG I: DANH MỤC SẢN PHẨM VÀ BIỂU GIÁ CHI TIẾT
+
+### Điều 1: Gói dịch vụ Phần mềm quản trị doanh nghiệp (SME-ERP Cloud)
+SME-ERP Cloud là giải pháp phần mềm quản trị nguồn lực doanh nghiệp tích hợp các module: Nhân sự, Bán hàng, Kho vận, Tài chính - Kế toán. Biểu giá thuê bao hằng tháng được quy định chi tiết theo các gói như sau:
+
+1. **Gói Standard (Phù hợp cho doanh nghiệp nhỏ, startup):**
+   * **Hạn mức người dùng:** Tối đa 15 tài khoản đăng nhập đồng thời.
+   * **Dung lượng lưu trữ dữ liệu:** 20 GB SSD Cloud Storage.
+   * **Tính năng:** Quản lý chấm công, tính lương cơ bản, quản lý khách hàng (CRM) cơ bản, quản lý kho đơn giản. Không hỗ trợ API tích hợp bên thứ ba.
+   * **Mức giá thuê bao:** 1.500.000 VNĐ/tháng (Chưa bao gồm 10% thuế GTGT).
+   * **Thời hạn thanh toán tối thiểu:** 6 tháng.
+   * **Phí khởi tạo ban đầu:** 5.000.000 VNĐ (Thu một lần duy nhất khi ký hợp đồng phục vụ cấu hình server ảo hóa riêng, import dữ liệu ban đầu và đào tạo sử dụng 4 buổi).
+
+2. **Gói Professional (Phù hợp cho doanh nghiệp vừa và đang phát triển):**
+   * **Hạn mức người dùng:** Tối đa 50 tài khoản đăng nhập đồng thời.
+   * **Dung lượng lưu trữ dữ liệu:** 100 GB SSD Cloud Storage.
+   * **Tính năng:** Đầy đủ tính năng gói Standard, cộng thêm: Quản lý kế toán kép, báo cáo thuế tự động, quản lý chuỗi cung ứng nâng cao, tích hợp hóa đơn điện tử, hỗ trợ API mở (Open API) kết nối tối đa 3 hệ thống bên ngoài.
+   * **Mức giá thuê bao:** 3.500.000 VNĐ/tháng (Chưa bao gồm 10% thuế GTGT).
+   * **Thời hạn thanh toán tối thiểu:** 12 tháng.
+   * **Khuyến mại:** Thanh toán trước 12 tháng được tặng thêm 1 tháng sử dụng dịch vụ miễn phí (tổng thời gian sử dụng 13 tháng).
+   * **Phí khởi tạo ban đầu:** 5.000.000 VNĐ (Thu một lần duy nhất, hỗ trợ đào tạo 8 buổi và tùy biến mẫu hóa đơn/phiếu kho).
+
+3. **Gói Enterprise (Dành cho doanh nghiệp quy mô lớn hoặc tập đoàn):**
+   * **Hạn mức người dùng:** Không giới hạn số lượng tài khoản đăng nhập.
+   * **Dung lượng lưu trữ dữ liệu:** Từ 500 GB SSD Cloud Storage trở lên (có thể mở rộng theo yêu cầu).
+   * **Tính năng:** Đầy đủ tính năng gói Professional, cộng thêm: Tùy biến toàn bộ giao diện và quy trình nghiệp vụ theo yêu cầu cụ thể (Custom Workflows), tích hợp hệ thống tổng đài ảo VoIP, hệ thống báo cáo thông minh BI (Business Intelligence), phân quyền đa chi nhánh/đa công ty con, cơ sở dữ liệu cô lập vật lý (Dedicated Database Server).
+   * **Mức giá thuê bao:** Liên hệ trực tiếp Giám đốc Kinh doanh để báo giá dựa trên khảo sát hiện trạng hạ tầng và số lượng module tùy biến (mức giá sàn cam kết tối thiểu 10.000.000 VNĐ/tháng).
+   * **Thời hạn thanh toán tối thiểu:** 24 tháng.
+   * **Phí khởi tạo ban đầu:** Miễn phí hoàn toàn phí cài đặt ban đầu. Chi phí tùy biến code phát sinh được tính dựa trên số lượng ngày công (Man-Month) phát triển thực tế với đơn giá 1.800.000 VNĐ/Man-Day.
+
+---
+
+## CHƯƠNG II: CHÍNH SÁCH CHIẾT KHẤU ĐỐI TÁC VÀ ĐẠI LÝ (PARTNER POLICY)
+
+### Điều 2: Phân loại đối tác và Điều kiện công nhận
+Công ty SME-Tech hợp tác với các đại lý, công ty giải pháp công nghệ trên toàn quốc theo các cấp đại lý dựa trên doanh số tích lũy thực tế trong năm tài chính (từ ngày 01/01 đến hết ngày 31/12):
+
+1. **Đại lý cấp Đồng (Bronze Partner):**
+   * **Điều kiện:** Đạt doanh số bán hàng dưới 100.000.000 VNĐ/năm.
+   * **Tỷ lệ chiết khấu:** 15% trên giá trị hợp đồng trước thuế GTGT (chỉ tính trên giá trị thuê bao phần mềm SaaS, không áp dụng cho phí khởi tạo ban đầu).
+2. **Đại lý cấp Bạc (Silver Partner):**
+   * **Điều kiện:** Đạt doanh số bán hàng từ 100.000.000 VNĐ đến dưới 500.000.000 VNĐ/năm.
+   * **Tỷ lệ chiết khấu:** 20% trên giá trị hợp đồng trước thuế GTGT.
+3. **Đại lý cấp Vàng (Gold Partner):**
+   * **Điều kiện:** Đạt doanh số bán hàng từ 500.000.000 VNĐ/năm trở lên.
+   * **Tỷ lệ chiết khấu:** 25% trên giá trị hợp đồng trước thuế GTGT.
+   * **Đặc quyền đi kèm:** 
+     * Được cung cấp gói hỗ trợ kỹ thuật ưu tiên 24/7 từ đội ngũ Senior Engineer trị giá 12.000.000 VNĐ/năm hoàn toàn miễn phí.
+     * Được ghi tên và thông tin liên hệ trên trang đối tác chính thức của website SME-Tech.
+     * Được cung cấp tài khoản Demo Gói Professional miễn phí 5 user để phục vụ công tác bán hàng và tư vấn.
+
+### Điều 3: Quy chế quyết toán hoa hồng đại lý
+* Hoa hồng đại lý được chốt số liệu vào ngày cuối cùng của tháng dương lịch.
+* Bộ phận Kế toán của SME-Tech sẽ gửi Đối chiếu hoa hồng cho đại lý trước ngày 05 của tháng tiếp theo.
+* Ngày thanh toán hoa hồng chính thức: Ngày 10 hằng tháng. Tiền hoa hồng được chuyển khoản trực tiếp vào tài khoản ngân hàng đã đăng ký của đại lý sau khi đại lý xuất hóa đơn tài chính hợp lệ cho phần hoa hồng được hưởng. Nếu đại lý là cá nhân không có hóa đơn, công ty sẽ khấu trừ 10% thuế TNCN trước khi chi trả.
+
+---
+
+## CHƯƠNG III: QUY TRÌNH HỦY HỢP ĐỒNG, ĐỔI TRẢ VÀ HOÀN TIỀN
+
+### Điều 4: Điều kiện hủy hợp đồng và hoàn tiền
+Nhằm bảo vệ quyền lợi tối đa cho khách hàng, công ty SME-Tech cam kết chính sách dùng thử và hoàn trả tiền minh bạch đối với các dịch vụ phần mềm SaaS như sau:
+
+1. **Yêu cầu hủy hợp đồng trong vòng 7 ngày đầu tiên (Tính từ Ngày Kích Hoạt tài khoản):**
+   * **Điều kiện áp dụng:** Khách hàng phát hiện lỗi phần mềm nghiêm trọng của hệ thống (ví dụ: mất dữ liệu không rõ lý do, lỗi tính toán sai số liệu kế toán cốt lõi, service bị gián đoạn liên tục quá 4 giờ/ngày) và đã phản ánh cho bộ phận kỹ thuật hỗ trợ nhưng bộ phận kỹ thuật không thể khắc phục được sự cố trong vòng 48 giờ kể từ khi tiếp nhận thông tin.
+   * **Tỷ lệ hoàn tiền:** Hoàn trả 100% chi phí dịch vụ thuê bao hằng tháng mà khách hàng đã thanh toán trước. 
+   * **Lưu ý đặc biệt:** Khoản phí khởi tạo và chuyển giao ban đầu trị giá 5.000.000 VNĐ đối với gói Standard và Professional sẽ **không được hoàn lại** dưới bất kỳ hình thức nào vì đây là chi phí công ty đã thực chi để trả cho kỹ sư hỗ trợ cài đặt, cấu hình hệ thống và đào tạo nhân sự trực tiếp.
+2. **Yêu cầu hủy hợp đồng từ ngày thứ 8 đến ngày thứ 30:**
+   * **Điều kiện áp dụng:** Khách hàng không còn nhu cầu sử dụng dịch vụ do thay đổi mô hình kinh doanh hoặc hệ thống không đáp ứng được quy trình nội bộ đặc thù mà trước đó khách hàng chưa khảo sát kỹ.
+   * **Tỷ lệ hoàn tiền:** Hoàn trả 70% số tiền thuê bao còn lại của hợp đồng. 
+   * **Công thức tính tiền hoàn trả:**
+     $$\text{Số tiền hoàn trả} = (\text{Tổng số tiền thuê bao đã đóng} - \text{Giá gốc 1 tháng sử dụng}) \times 70\%$$
+     *Trong đó: "Giá gốc 1 tháng sử dụng" được tính theo biểu giá gốc không áp dụng bất kỳ chương trình khuyến mãi hay giảm giá nào.*
+3. **Yêu cầu hủy hợp đồng sau 30 ngày sử dụng:**
+   * Công ty SME-Tech **không hỗ trợ** chính sách đổi trả và hoàn tiền sau 30 ngày kể từ ngày kích hoạt tài khoản sử dụng, trừ các trường hợp có thỏa thuận bằng văn bản đặc biệt được ký trực tiếp giữa Giám đốc điều hành hai bên.
+
+### Điều 5: Quy trình tiếp nhận và xử lý hoàn tiền
+* **Bước 1:** Khách hàng gửi Yêu cầu hoàn tiền chính thức bằng văn bản có ký tên, đóng dấu hợp lệ (đối với tổ chức) hoặc ký ghi rõ họ tên kèm bản sao CMND/CCCD (đối với cá nhân) qua email hỗ trợ: `billing@sme-tech.com`. Trong văn bản phải nêu rõ lý do hủy dịch vụ, thông tin số tài khoản nhận tiền hoàn và cung cấp đầy đủ bằng chứng lỗi hệ thống (ảnh chụp màn hình, mã lỗi, lịch sử chat hỗ trợ).
+* **Bước 2:** Bộ phận CSKH phối hợp cùng bộ phận Kỹ thuật kiểm tra tính xác thực của thông tin lỗi trong vòng 3 ngày làm việc kể từ ngày nhận email.
+* **Bước 3:** Bộ phận Kế toán lập phiếu duyệt hoàn tiền gửi CEO ký phê duyệt trong vòng 2 ngày làm việc tiếp theo.
+* **Bước 4:** Chuyển khoản tiền hoàn trả cho khách hàng. Tiền sẽ được chuyển về tài khoản ngân hàng của khách hàng trong vòng tối đa 7 ngày làm việc kể từ khi được CEO phê duyệt.
+
+---
+
+## CHƯƠNG IV: CHẾ ĐỘ BẢO HÀNH VÀ CAM KẾT CHẤT LƯỢNG DỊCH VỤ (SLA)
+
+### Điều 6: Định nghĩa các mức độ sự cố hệ thống
+* **Lỗi Mức 1 (Critical Incident - Hệ thống sập):** Toàn bộ hoặc trên 80% người dùng không thể truy cập vào hệ thống phần mềm, lỗi cơ sở dữ liệu làm gián đoạn mọi giao dịch của doanh nghiệp.
+* **Lỗi Mức 2 (Major Incident - Lỗi chức năng chính):** Một hoặc một vài chức năng cốt lõi của hệ thống (ví dụ: chức năng tính lương, chức năng xuất hóa đơn, chức năng kiểm kho) bị lỗi không hoạt động hoặc hoạt động sai lệch nghiêm trọng, nhưng người dùng vẫn truy cập được vào các chức năng khác của hệ phần mềm.
+* **Lỗi Mức 3 (Minor Incident - Lỗi chức năng phụ):** Các chức năng phụ trợ bị lỗi nhẹ (ví dụ: giao diện hiển thị lệch, lỗi xuất file báo cáo định dạng Excel bị thiếu dòng tiêu đề, nút bấm phản hồi chậm) nhưng không ảnh hưởng lớn đến quy trình vận hành chính của doanh nghiệp.
+
+### Điều 7: Cam kết thời gian phản hồi và khắc phục (SLA Matrix)
+Thời gian phản hồi và xử lý lỗi được cam kết cụ thể theo bảng phân cấp gói dịch vụ dưới đây:
+
+| Gói Dịch Vụ | Tham Số SLA | Lỗi Mức 1 | Lỗi Mức 2 | Lỗi Mức 3 | Khung Giờ Hỗ Trợ |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Standard** | Thời gian phản hồi tối đa | 4 giờ làm việc | 8 giờ làm việc | 24 giờ làm việc | Giờ hành chính (Thứ 2 - Thứ 6, 08:30-18:00) |
+| | Thời gian xử lý tối đa | 12 giờ làm việc | 24 giờ làm việc | 72 giờ làm việc | |
+| **Professional** | Thời gian phản hồi tối đa | 2 giờ làm việc | 4 giờ làm việc | 12 giờ làm việc | Từ 08:00 đến 22:00 tất cả các ngày |
+| | Thời gian xử lý tối đa | 6 giờ làm việc | 12 giờ làm việc | 36 giờ làm việc | |
+| **Enterprise** | Thời gian phản hồi tối đa | 30 phút | 1 giờ | 4 giờ | 24/7/365 (Bao gồm lễ, Tết) |
+| | Thời gian xử lý tối đa | 4 giờ | 8 giờ | 16 giờ | |
+
+*Lưu ý: "Giờ làm việc" hoặc "Giờ" ở bảng trên được tính theo khung giờ hỗ trợ tương ứng của từng gói dịch vụ. Nếu lỗi được báo ngoài khung giờ hỗ trợ, thời gian SLA sẽ bắt đầu được tính từ thời điểm mở cửa của khung giờ hỗ trợ tiếp theo.*

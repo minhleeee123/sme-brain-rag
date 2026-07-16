@@ -1,0 +1,97 @@
+# HỆ THỐNG QUẢN LÝ CHẤT LƯỢNG - CÔNG TY CỔ PHẦN CÔNG NGHỆ SME-TECH
+*Ký hiệu tài liệu: SOP-TECH-OPS-009*
+*Phiên bản: 2.4*
+*Ngày ban hành: 10 tháng 03 năm 2026*
+
+# QUY TRÌNH VẬN HÀNH KỸ THUẬT TIÊU CHUẨN (SOP)
+*(Ban hành và giám sát bởi Bộ phận DevOps và Vận hành Hệ thống - Cloud Operations Team)*
+
+---
+
+## PHẦN I: HỆ THỐNG GIÁM SÁT VÀ QUY TRÌNH XỬ LÝ SỰ CỐ MÁY CHỦ (SERVER INCIDENT RESPONSE PLAYBOOK)
+
+### Điều 1: Kiến trúc giám sát tự động
+Toàn bộ hạ tầng máy chủ của công ty SME-Tech (chạy trên nền tảng điện toán đám mây AWS và server vật lý đặt tại IDC Viettel Cầu Giấy) được giám sát tập trung qua hệ thống mã nguồn mở:
+1. **Prometheus:** Dùng để thu thập các số liệu hiệu năng (Metrics Collector) của hệ thống với chu kỳ quét (scraping interval) là 15 giây/lần.
+2. **Grafana:** Giao diện hiển thị biểu đồ trực quan (Dashboard) phục vụ giám sát CPU, RAM, Disk I/O, Network Bandwidth, HTTP Request Rates, Latency và Error Rates.
+3. **Alertmanager:** Bộ xử lý cảnh báo kết nối trực tiếp với Prometheus để phân loại, gộp nhóm và đẩy thông báo về kênh Slack `#tech-alerts` và cuộc gọi tự động qua tổng đài VoIP Stringee cho kỹ sư trực ca (On-call Engineer) trong trường hợp khẩn cấp.
+
+### Điều 2: Định nghĩa phân loại lỗi kỹ thuật và Quy trình ứng cứu sự cố
+Kỹ sư trực ca DevOps có nghĩa vụ túc trực điện thoại 24/7 theo lịch trực và phải xử lý sự cố hệ thống nghiêm ngặt theo các kịch bản sau:
+
+#### 1. Lỗi Cảnh Báo (Mức độ: WARN)
+* **Dấu hiệu nhận biết:**
+  * CPU Usage của cụm máy chủ ứng dụng vượt quá 85% liên tục trong 10 phút.
+  * Bộ nhớ RAM sử dụng vượt quá 90% liên tục trong 15 phút.
+  * Dung lượng ổ cứng lưu trữ còn trống dưới 15% (Free Disk Space < 15%).
+* **Quy trình xử lý của Kỹ sư trực ca:**
+  * Truy cập Grafana dashboard xem log ứng dụng qua cụm Elasticsearch-Logstash-Kibana (ELK Stack) để tìm tiến trình (process) đang ngốn tài nguyên.
+  * Nếu phát hiện rò rỉ bộ nhớ (Memory Leak) do code lỗi, tiến hành khởi động lại tiến trình đó một cách an toàn bằng lệnh `pm2 reload` hoặc `systemctl restart service`.
+  * Nếu dung lượng ổ cứng đầy do file log phình to, tiến hành dọn dẹp các log cũ ngoài 7 ngày thông qua script dọn dẹp tự động hoặc chạy lệnh nén log.
+  * Kết quả xử lý phải được ghi lại trong file log kiểm tra định kỳ của nhóm vận hành.
+
+#### 2. Lỗi Nghiêm Trọng (Mức độ: CRIT-099 - Hệ thống Downtime)
+* **Dấu hiệu nhận biết:**
+  * Tỷ lệ lỗi HTTP 5xx (Server Error) phản hồi từ hệ thống Load Balancer vượt quá 5% tổng traffic trong 2 phút liên tiếp.
+  * Máy chủ cơ sở dữ liệu chính (Master Database PostgreSQL) không phản hồi kết nối.
+  * Máy chủ ứng dụng bị ngắt kết nối vật lý hoặc sập nguồn hoàn toàn (Service Unavailable).
+* **Quy trình xử lý khẩn cấp (Incident Response Workflow):**
+  * **Bước 1: Chuyển hướng Traffic khẩn cấp (Failover)**
+    * Lập tức đăng nhập vào AWS Route 53 hoặc Cloudflare DNS. Chuyển cấu hình định tuyến DNS từ máy chủ chính đang gặp lỗi sang cụm máy chủ dự phòng (Backup Server - Hot Standby) đặt tại khu vực khác để khôi phục dịch vụ cho khách hàng nhanh nhất có thể. Thời gian chuyển đổi bắt buộc hoàn tất dưới 5 phút kể từ khi nhận cảnh báo.
+  * **Bước 2: Phát báo động sự cố (Incident Declaration)**
+    * Kỹ sư trực ca bắt buộc phải viết thông báo ngắn gọn về lỗi kỹ thuật (bao gồm: triệu chứng, mức độ ảnh hưởng, thời gian bắt đầu xảy ra và ước tính thời gian khắc phục) và đăng lên kênh Slack `#tech-alerts` và `#all-staff` trong vòng 10 phút.
+    * Gọi điện thoại trực tiếp báo cáo cho Trưởng phòng Kỹ thuật (CTO) nếu sự cố không được khắc phục xong trong vòng 15 phút.
+  * **Bước 3: Điều tra và Debug trên môi trường cách ly**
+    * Sau khi đã hoàn tất Failover và hệ thống của khách hàng đã chạy ổn định trên server dự phòng, kỹ sư trực ca tiến hành cô lập máy chủ bị lỗi để phân tích nguyên nhân.
+    * Kiểm tra log hệ thống (`/var/log/syslog`, `/var/log/nginx/error.log`, PostgreSQL log).
+    * Thực hiện sửa lỗi, chạy thử nghiệm trên môi trường Staging. Sau khi xác nhận lỗi đã được vá triệt để, tiến hành sync dữ liệu ngược lại và đưa máy chủ chính trở lại hoạt động bình thường.
+  * **Bước 4: Báo cáo sau sự cố (Post-Mortem Report)**
+    * Trưởng nhóm DevOps phối hợp kỹ sư trực ca viết tài liệu phân tích nguyên nhân gốc rễ (Root Cause Analysis - RCA), các hành động đã xử lý và đề xuất giải pháp phòng ngừa trong tương lai. Báo cáo RCA phải gửi cho Ban Giám đốc và bộ phận CSKH (để gửi phản hồi khách hàng theo SLA) trong vòng 24 giờ kể từ khi sự cố được khắc phục hoàn toàn.
+
+---
+
+## PHẦN II: CHÍNH SÁCH SAO LƯU VÀ PHỤC HỒI DỮ LIỆU (DATA BACKUP & DISASTER RECOVERY POLICY)
+
+### Điều 3: Quy định sao lưu bắt buộc
+Dữ liệu của khách hàng (bao gồm cơ sở dữ liệu PostgreSQL, mã nguồn ứng dụng, tệp tin tải lên của người dùng) là tài sản tối cao của công ty. Quy định sao lưu bắt buộc được phân cấp như sau:
+
+1. **Sao lưu hằng ngày (Daily Backup):**
+   * **Thời gian thực hiện:** Chạy tự động vào lúc 02:00 sáng hằng ngày (giờ Việt Nam) - thời điểm lượng traffic hệ thống thấp nhất.
+   * **Cơ chế:** Sao lưu gia tăng (Incremental Backup) - chỉ sao lưu các phần dữ liệu thay đổi so với ngày trước đó để tiết kiệm tài nguyên.
+   * **Địa điểm lưu trữ:** Máy chủ sao lưu nội bộ (Local Backup Server) đặt tại văn phòng công ty (Địa chỉ IP nội bộ: `192.168.10.50`).
+   * **Thời hạn lưu trữ:** Bản sao lưu hằng ngày được lưu giữ tối đa 14 ngày, sau đó hệ thống tự động xóa bản cũ nhất (First In, First Out).
+
+2. **Sao lưu hằng tuần (Weekly Backup):**
+   * **Thời gian thực hiện:** Chạy tự động vào lúc 03:00 sáng ngày Chủ Nhật hằng tuần.
+   * **Cơ chế:** Sao lưu toàn phần (Full Backup) - nén toàn bộ cơ sở dữ liệu và thư mục media.
+   * **Mã hóa bảo mật:** Trước khi truyền đi, bản sao lưu phải được mã hóa bằng thuật toán mã hóa tiên tiến **AES-256** sử dụng khóa mã hóa gốc lưu giữ an toàn trong AWS Key Management Service (KMS).
+   * **Địa điểm lưu trữ:** Đẩy trực tiếp lên dịch vụ lưu trữ đám mây Amazon S3, lưu trữ tại S3 bucket có tên: `sme-tech-backups-production` đặt tại khu vực Singapore (ap-southeast-1). Bản sao lưu này được cấu hình chính sách Object Lock (chống ghi đè và chống xóa) để đề phòng ransomware tấn công phá hoại.
+   * **Thời hạn lưu trữ:** Lưu trữ tối đa 90 ngày. Sau 90 ngày, dữ liệu tự động chuyển sang lưu trữ giá rẻ AWS Glacier để lưu trữ lịch sử trong 1 năm trước khi hủy hoàn toàn.
+
+### Điều 4: Quy trình kiểm tra khôi phục dữ liệu định kỳ (Restore Test)
+Không có bản sao lưu nào được coi là an toàn nếu chưa được chạy thử nghiệm khôi phục.
+* **Thời gian thực hiện:** Ngày 05 hằng tháng, nhóm DevOps phải phân công 1 kỹ sư tiến hành kiểm tra khôi phục thử nghiệm dữ liệu (Restore Test).
+* **Quy trình thực hiện:**
+  * Khởi tạo một máy chủ cơ sở dữ liệu ảo hóa độc lập trên môi trường Staging.
+  * Tải bản sao lưu gần nhất từ AWS S3 hoặc máy chủ local về.
+  * Thực hiện lệnh giải mã và khôi phục dữ liệu lên server Staging mới tạo.
+  * Thực hiện chạy bộ test script tự động kiểm tra tính toàn vẹn của dữ liệu (Database Integrity Check), đếm số bản ghi chính và chạy thử 10 giao dịch mẫu của khách hàng để đảm bảo dữ liệu không bị lỗi cấu trúc (Corruption).
+* **Ghi nhật ký:** Kết quả kiểm tra khôi phục thử nghiệm (bao gồm: tên file backup, thời gian khôi phục, dung lượng file, kết quả thành công/thất bại, lỗi phát sinh nếu có) bắt buộc phải ghi lại chi tiết vào file nhật ký hệ thống `restore_test.log` để phục vụ công tác thanh tra kiểm toán ISO 27001 định kỳ.
+
+---
+
+## PHẦN III: QUY TRÌNH QUẢN LÝ TRUY CẬP VÀ PHÂN QUYỀN HỆ THỐNG (ACCESS CONTROL POLICY)
+
+### Điều 5: Nguyên tắc phân quyền tối thiểu (Least Privilege Principle)
+Tất cả nhân sự trong công ty chỉ được cấp quyền truy cập tối thiểu vừa đủ để hoàn thành chức trách công việc của mình:
+1. **Môi trường Production (Hệ thống chạy thật của khách hàng):**
+   * Chỉ các kỹ sư thuộc nhóm Vận hành hệ thống (DevOps, SysAdmin) được phê duyệt danh sách chính thức mới được cấp khóa SSH (SSH Key) truy cập vào server Production.
+   * Quyền truy cập quản trị cơ sở dữ liệu Production (Database Root Access) chỉ cấp cho Database Administrator (DBA) và Trưởng phòng Kỹ thuật (CTO).
+   * Nhân viên phát triển phần mềm (Developer), kiểm thử (QA/QC) tuyệt đối không được cấp quyền truy cập, can thiệp trực tiếp vào máy chủ Production.
+2. **Môi trường Staging và Development (Thử nghiệm và phát triển):**
+   * Developer và QA/QC được toàn quyền truy cập, build code, deploy và xem log trên môi trường này để phục vụ công việc phát triển tính năng mới.
+
+### Điều 6: Yêu cầu bảo mật tài khoản quản trị
+* Toàn bộ tài khoản quản trị hạ tầng (AWS Root/IAM Accounts, Github Organization, Cloudflare Account, VPN Access) bắt buộc phải kích hoạt xác thực 2 lớp (MFA/2FA) thông qua Google Authenticator hoặc khóa bảo mật vật lý YubiKey.
+* Mật khẩu gốc (Root Password) của máy chủ cơ sở dữ liệu chính được lưu giữ an toàn, mã hóa trong hệ thống quản lý mật khẩu tập trung **HashiCorp Vault**. Kỹ sư không được phép lưu trữ mật khẩu dưới dạng văn bản thuần (plain text) trên máy tính cá nhân hoặc gửi qua các kênh chat không an toàn như Slack, Skype, Zalo.
+* Khi nhân sự kỹ thuật nghỉ việc hoặc chuyển bộ phận công tác: Bộ phận IT Support và DevOps Lead có nghĩa vụ phối hợp thu hồi toàn bộ tài khoản AWS, SSH Key, quyền truy cập Github, VPN, tài khoản Slack và email công ty của nhân sự đó trong vòng tối đa 4 giờ kể từ thời điểm nhân sự hoàn tất bàn giao công việc bàn giao máy tính cá nhân. Lịch sử thu hồi tài khoản phải được ghi nhận vào hệ thống Log Audit.
